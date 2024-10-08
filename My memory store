@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Touch Memory Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 15px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .memory-log {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+        }
+        .log-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AI Touch Memory Store</h1>
+    <p>Touch the button to store a memory, and click 'Show My Memory' to retrieve it.</p>
+
+    <button onclick="storeMemory()">Touch to Store Memory</button>
+    <button onclick="showMemory()">Show My Memory</button>
+
+    <div class="memory-log" id="memory-log">
+        <h2>Stored Memories:</h2>
+    </div>
+
+    <script>
+        let memoryCount = 0;
+        let storedMemories = [];
+
+        function storeMemory() {
+            memoryCount++;
+            const memoryText = `Memory ${memoryCount}: AI remembers touch at ${new Date().toLocaleTimeString()}`;
+            storedMemories.push(memoryText);
+            alert('Memory stored!');
+        }
+
+        function showMemory() {
+            const memoryLog = document.getElementById('memory-log');
+            memoryLog.innerHTML = '<h2>Stored Memories:</h2>';  // Reset memory log display
+            if (storedMemories.length === 0) {
+                memoryLog.innerHTML += '<p>No memories stored yet.</p>';
+            } else {
+                storedMemories.forEach(memory => {
+                    const newMemory = document.createElement('div');
+                    newMemory.className = 'log-item';
+                    newMemory.innerHTML = memory;
+                    memoryLog.appendChild(newMemory);
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
